@@ -1,4 +1,6 @@
+// pages/500.tsx
 import { useRouter } from 'next/router';
+
 export default function Custom500() {
   const router = useRouter();
   return (
@@ -6,8 +8,18 @@ export default function Custom500() {
       <h1 className="text-4xl font-bold mb-4">500 – Oisann, noe gikk galt</h1>
       <p className="mb-6">Vi beklager. Vårt team er varslet.</p>
       <div className="flex gap-4">
-        <button onClick={() => router.reload()} className="bg-blue-600 text-white px-4 py-2 rounded">Prøv igjen</button>
-        <a href="mailto:damoun.nassehi@uib.no?subject=Feilrapport%20500" className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">Rapporter feil</a>
+        <button
+          onClick={() => router.reload()}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Prøv igjen
+        </button>
+        <a
+          href="mailto:damoun.nassehi@uib.no?subject=Feilrapport%20500"
+          className="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300"
+        >
+          Rapporter feil
+        </a>
       </div>
     </div>
   );
