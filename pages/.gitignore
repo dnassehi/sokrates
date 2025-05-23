@@ -1,0 +1,11 @@
+# Miljøvariabler
+.env*
+!.env.example
+
+# Node.js dependencies
+/node_modules/
+
+# Next.js build
+dist/
+.next/
+/out/
