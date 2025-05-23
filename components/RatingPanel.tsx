@@ -1,0 +1,1 @@
+export default function RatingPanel({ sessionId, patientId }) { /* se 5.7-kode */ }
