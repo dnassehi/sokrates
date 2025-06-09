@@ -1,0 +1,21 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "sessions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "clinicCode", "order": "ASCENDING" },
+        { "fieldPath": "startedAt",  "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "sessions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "clinicCode", "order": "ASCENDING" },
+        { "fieldPath": "status",     "order": "ASCENDING" },
+        { "fieldPath": "startedAt",  "order": "DESCENDING" }
+      ]
+    }
+  ]
+}
