@@ -150,8 +150,8 @@ export default function DashboardPage() {
                 {s.status === 'awaiting_approval' ? 'Venter' : 'Ferdig'}
               </td>
               <td className="p-2 border">
-                <Link href={`/dashboard/${s.id}`}>
-                  <a className="text-blue-600 hover:underline">Vis / Rate</a>
+                <Link href={`/dashboard/${s.id}`} className="text-blue-600 hover:underline">
+                  Vis / Rate
                 </Link>
               </td>
             </tr>
