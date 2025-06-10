@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { collection, query, where, orderBy, getDocs, Timestamp } from 'firebase/firestore'
-import { firestore, auth } from '../../lib/firebase'
+import { firestore, auth } from '../lib/firebase'
 import { useRouter } from 'next/router'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts'
-import useRequireAuth from '../../lib/useRequireAuth'  // Ny hook for å kreve innlogging
+import useRequireAuth from '../lib/useRequireAuth'  // Ny hook for å kreve innlogging
 
 type Session = {
   id: string
@@ -139,8 +139,8 @@ export default function DashboardPage() {
                 {s.status === 'awaiting_approval' ? 'Venter' : 'Ferdig'}
               </td>
               <td className="p-2 border">
-                <Link href={`/dashboard/${s.id}`}>
-                  <a className="text-blue-600 hover:underline">Vis / Rate</a>
+                <Link href={`/dashboard/${s.id}`} className="text-blue-600 hover:underline">
+                  Vis / Rate
                 </Link>
               </td>
             </tr>
