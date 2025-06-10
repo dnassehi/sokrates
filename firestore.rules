@@ -1,20 +1,24 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // (Same as previously defined in /lib/firestore.rules)
+    // Klinikksamling - ingen direkte lesing/skriving (bruk egne endepunkter)
     match /clinics/{code} {
       allow read, write: if false;
     }
+    // Legesamling - lege kan lese egen profil
     match /doctors/{id} {
       allow read: if request.auth.uid == id;
       allow write: if false;
     }
+    // Sessions - pasient og tilhørende lege har lesetilgang
     match /sessions/{sid} {
       allow read: if request.auth.uid in [resource.data.doctorId, resource.data.patientId];
       allow create: if false;
+      // Pasient kan oppdatere sin session *kun* for å legge inn oppsummering (status -> awaiting_approval)
       allow update: if request.auth.uid == resource.data.patientId
                     && request.resource.data.status == 'awaiting_approval';
     }
+    // Underkolleksjon for meldinger i en session (ikke brukt direkte i UI her)
     match /sessions/{sid}/messages/{mid} {
       allow read, create: if request.auth.uid in [
         get(/databases/$(database)/documents/sessions/$(sid)).data.patientId,
@@ -22,6 +26,7 @@ service cloud.firestore {
       ];
       allow update, delete: if false;
     }
+    // Ratings - lege kan opprette en rating
     match /ratings/{rid} {
       allow create: if request.auth.uid == request.resource.data.doctorId;
       allow read, update, delete: if false;

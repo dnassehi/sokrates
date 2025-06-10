@@ -1,5 +1,4 @@
-// components/SubmissionComplete.tsx
-import React from 'react';
+import React from 'react'
 
 interface SubmissionCompleteProps {
   onNewRequest: () => void;
@@ -18,5 +17,5 @@ export default function SubmissionComplete({ onNewRequest }: SubmissionCompleteP
         Ny henvendelse
       </button>
     </div>
-  );
+  )
 }

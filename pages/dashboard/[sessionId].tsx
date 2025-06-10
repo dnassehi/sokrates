@@ -1,35 +1,39 @@
-// pages/dashboard/[sessionId].tsx
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { doc, getDoc } from 'firebase/firestore';
-import { auth, firestore } from '../../lib/firebase';
-import RatingPanel from '../../components/RatingPanel';
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { doc, getDoc } from 'firebase/firestore'
+import { auth, firestore } from '../../lib/firebase'
+import RatingPanel from '../../components/dashboard/RatingPanel'
 
 export default function SessionDetailPage() {
-  const router = useRouter();
-  const { sessionId } = router.query as { sessionId: string };
-  const [loading, setLoading] = useState(true);
-  const [summary, setSummary] = useState<any>(null);
-  const [patientId, setPatientId] = useState<string>('');
+  const router = useRouter()
+  const { sessionId } = router.query as { sessionId: string }
+  const [loading, setLoading] = useState(true)
+  const [summary, setSummary] = useState<any>(null)
+  const [patientId, setPatientId] = useState('')
 
   useEffect(() => {
-    if (!sessionId) return;
+    if (!sessionId) return
+    // Krev innlogging, ellers gå til /login
     auth.onAuthStateChanged(async user => {
-      if (!user) return router.replace('/login');
-      const ref = doc(firestore, 'sessions', sessionId);
-      const snap = await getDoc(ref);
-      if (!snap.exists()) return router.replace('/dashboard');
-      const data = snap.data();
-      if (data.doctorId !== user.uid || !data.summary) {
-        return router.replace('/dashboard');
+      if (!user) return router.replace('/login')
+      const ref = doc(firestore, 'sessions', sessionId)
+      const snap = await getDoc(ref)
+      if (!snap.exists()) {
+        return router.replace('/dashboard')
       }
-      setSummary(data.summary);
-      setPatientId(data.patientId);
-      setLoading(false);
-    });
-  }, [sessionId, router]);
+      const data = snap.data()
+      if (data.doctorId !== user.uid || !data.summary) {
+        return router.replace('/dashboard')
+      }
+      setSummary(data.summary)
+      setPatientId(data.patientId)
+      setLoading(false)
+    })
+  }, [sessionId, router])
 
-  if (loading) return <p className="p-8 text-center">Laster …</p>;
+  if (loading) {
+    return <p className="p-8 text-center">Laster …</p>
+  }
 
   return (
     <div className="p-8 max-w-2xl mx-auto space-y-6">
@@ -75,7 +79,7 @@ export default function SessionDetailPage() {
         </div>
       </div>
 
-      <RatingPanel sessionId={sessionId} patientId={patientId} />
+      <RatingPanel sessionId={sessionId as string} patientId={patientId} />
     </div>
-  );
+  )
 }

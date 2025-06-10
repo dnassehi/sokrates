@@ -1,27 +1,27 @@
-// pages/chat.tsx
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import InitModal from '../components/InitModal';
-import ChatWindow from '../components/ChatWindow';
-import SubmissionComplete from '../components/SubmissionComplete';
-import { auth } from '../lib/firebase';
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import InitModal from '../components/InitModal'
+import ChatWindow from '../components/ChatWindow'
+import SubmissionComplete from '../components/chat/SubmissionComplete'
+import { auth } from '../lib/firebase'
 
 export default function ChatPage() {
-  const router = useRouter();
-  const { clinicCode } = router.query;
-  const [started, setStarted] = useState(false);
-  const [completed, setCompleted] = useState(false);
+  const router = useRouter()
+  const { clinicCode } = router.query as { clinicCode?: string }
+  const [started, setStarted] = useState(false)
+  const [completed, setCompleted] = useState(false)
 
   useEffect(() => {
-    if (!clinicCode) router.replace('/');
-  }, [clinicCode, router]);
+    // Send bruker tilbake til forsiden hvis klinikkode mangler
+    if (!clinicCode) router.replace('/')
+  }, [clinicCode, router])
 
-  const handleAccept = () => setStarted(true);
-  const handleComplete = () => setCompleted(true);
+  const handleAccept = () => setStarted(true)
+  const handleComplete = () => setCompleted(true)
   const handleNew = async () => {
-    await auth.signOut();
-    router.replace('/');
-  };
+    await auth.signOut()
+    router.replace('/')
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -29,5 +29,5 @@ export default function ChatPage() {
       {started && !completed && <ChatWindow onComplete={handleComplete} />}
       {completed && <SubmissionComplete onNewRequest={handleNew} />}
     </div>
-  );
+  )
 }

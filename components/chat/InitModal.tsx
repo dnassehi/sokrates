@@ -1,5 +1,4 @@
-// components/InitModal.tsx
-import React from 'react';
+import React from 'react'
 
 interface InitModalProps {
   onAccept: () => void;
@@ -23,5 +22,5 @@ export default function InitModal({ onAccept }: InitModalProps) {
         </button>
       </div>
     </div>
-  );
+  )
 }

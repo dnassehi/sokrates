@@ -19,31 +19,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(401).json({ error: 'Ugyldig token' })
   }
 
-  const { sessionId, summary } = req.body
-  if (typeof sessionId !== 'string' || typeof summary !== 'object') {
+  const { sessionId } = req.body
+  if (typeof sessionId !== 'string') {
     return res.status(400).json({ error: 'Ugyldig request body' })
   }
 
   // Hent sessions-dokumentet
-  const sessionRef = firestoreAdmin.collection('sessions').doc(sessionId)
-  const snap = await sessionRef.get()
-  if (!snap.exists) {
+  const sessionSnap = await firestoreAdmin.collection('sessions').doc(sessionId).get()
+  if (!sessionSnap.exists) {
     return res.status(404).json({ error: 'Session not found' })
   }
-  const data = snap.data()!
-  if (data.patientId !== uid) {
+  const data = sessionSnap.data()!
+  if (data.doctorId !== uid) {
     return res.status(403).json({ error: 'Forbidden' })
   }
 
-  // Oppdater session med oppsummering og sett status til "awaiting_approval"
-  await sessionRef.update({
-    summary: {
-      ...summary,
-      approvedBy: uid,
-      approvedAt: firestoreAdmin.FieldValue.serverTimestamp()
-    },
-    status: 'awaiting_approval'
+  // Returner oppsummering og relevant info
+  return res.status(200).json({
+    session: {
+      patientId: data.patientId,
+      summary: data.summary || null,
+      status: data.status
+    }
   })
-
-  return res.status(200).json({ success: true })
 }
