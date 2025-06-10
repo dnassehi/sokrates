@@ -39,7 +39,11 @@ export default function ForgotPasswordPage() {
           Send tilbakestilling
         </button>
         <p className="text-center text-sm mt-6">
-          <Link href="/login"><a className="text-blue-600 hover:underline">Tilbake til innlogging</a></Link>
+          <p className="text-center text-sm mt-6">
+            <Link href="/login" className="text-blue-600 hover:underline">
+              Tilbake til innlogging
+            </Link>
+</p>
         </p>
       </form>
     </div>

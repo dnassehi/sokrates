@@ -31,7 +31,9 @@ export default function TermsPage() {
         </section>
 
         <div className="mt-8 text-center">
-          <Link href="/"><a className="text-blue-600 hover:underline">Tilbake til forsiden</a></Link>
+          <Link href="/" className="text-blue-600 hover:underline">
+            Tilbake til forsiden
+          </Link>
         </div>
       </div>
     </div>
