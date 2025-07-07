@@ -129,4 +129,4 @@ const stream = await openai.chat.completions.create(
 ## 👤 Ansvarlig utvikler
 
 - Hovedkontakt: @damoun.nassehi
-- OpenAI-agent ble satt opp og finjustert i mai/juni 2025
+- OpenAI-agent ble satt opp og finjustert i mai/juni 2025.

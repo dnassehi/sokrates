@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { firestoreAdmin } from '../../lib/firebaseAdmin';
+import { firestoreAdmin, Timestamp } from '../../lib/firebaseAdmin';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const snap = await firestoreAdmin
     .collection('sessions')
     .where('clinicCode', '==', clinicCode.trim())
-    .where('startedAt', '==', firestoreAdmin.Timestamp.fromDate(ts))
+    .where('startedAt', '==', Timestamp.fromDate(ts))
     .limit(1)
     .get();
 
