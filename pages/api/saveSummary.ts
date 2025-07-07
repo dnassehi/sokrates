@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { authAdmin, firestoreAdmin } from '../../lib/firebaseAdmin'
+import { authAdmin, firestoreAdmin, FieldValue } from '../../lib/firebaseAdmin'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -40,7 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     summary: {
       ...summary,
       approvedBy: uid,
-      approvedAt: firestoreAdmin.FieldValue.serverTimestamp()
+      approvedAt: FieldValue.serverTimestamp()
     },
     status: 'awaiting_approval'
   })

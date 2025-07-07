@@ -4,7 +4,8 @@ import { authAdmin, firestoreAdmin } from '../../lib/firebaseAdmin';
 
 jest.mock('../../lib/firebaseAdmin', () => ({
   authAdmin: { verifyIdToken: jest.fn() },
-  firestoreAdmin: { collection: jest.fn().mockReturnThis(), add: jest.fn(), FieldValue: { serverTimestamp: jest.fn() } }
+  firestoreAdmin: { collection: jest.fn().mockReturnThis(), add: jest.fn() },
+  FieldValue: { serverTimestamp: jest.fn() }
 }));
 
 describe('/api/saveRating', () => {
