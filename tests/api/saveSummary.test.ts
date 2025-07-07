@@ -9,6 +9,7 @@ jest.mock('../../lib/firebaseAdmin', () => ({
     doc: jest.fn().mockReturnThis(),
     get: jest.fn(),
     update: jest.fn()
+
   },
   FieldValue: { serverTimestamp: jest.fn() }
 }));

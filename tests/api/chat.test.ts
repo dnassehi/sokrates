@@ -3,6 +3,9 @@ import handler, { config } from '../../pages/api/chat';
 import OpenAI from 'openai';
 
 describe('/api/chat', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   it('config disables bodyParser', () => {
     expect(config.api.bodyParser).toBe(false);
   });
@@ -25,7 +28,7 @@ describe('/api/chat', () => {
   it('streams SSE on valid request', async () => {
     // Mock OpenAI streaming
     const fakeStream = {
-      [Symbol.asyncIterator]: function* () {
+      async *[Symbol.asyncIterator]() {
         yield { choices: [{ delta: { content: '{"foo":"bar"}' } }] };
         yield { choices: [{ delta: {} }] };
       }
