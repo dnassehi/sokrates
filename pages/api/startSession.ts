@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { authAdmin, firestoreAdmin } from '../../lib/firebaseAdmin'
+import { authAdmin, firestoreAdmin, Timestamp } from '../../lib/firebaseAdmin'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -54,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     patientId: uid,
     doctorId: doctorId,
     status: 'in_progress',
-    startedAt: firestoreAdmin.Timestamp.fromDate(new Date())
+    startedAt: Timestamp.fromDate(new Date())
   })
 
   return res.status(200).json({ sessionId: sessionRef.id })

@@ -8,8 +8,8 @@ jest.mock('../../lib/firebaseAdmin', () => ({
     where: jest.fn().mockReturnThis(),
     limit: jest.fn().mockReturnThis(),
     get: jest.fn(),
-    Timestamp: { fromDate: jest.fn() }
-  }
+  },
+  Timestamp: { fromDate: jest.fn() }
 }));
 
 describe('/api/deleteSession', () => {
