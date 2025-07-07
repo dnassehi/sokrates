@@ -56,6 +56,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     status: 'in_progress',
     startedAt: Timestamp.fromDate(new Date())
   })
-
+  
   return res.status(200).json({ sessionId: sessionRef.id })
 }
