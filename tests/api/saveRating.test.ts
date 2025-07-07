@@ -1,10 +1,11 @@
 import { createMocks } from 'node-mocks-http';
 import handler from '../../pages/api/saveRating';
-import { authAdmin, firestoreAdmin } from '../../lib/firebaseAdmin';
+import { authAdmin, firestoreAdmin, FieldValue } from '../../lib/firebaseAdmin';
 
 jest.mock('../../lib/firebaseAdmin', () => ({
   authAdmin: { verifyIdToken: jest.fn() },
-  firestoreAdmin: { collection: jest.fn().mockReturnThis(), add: jest.fn(), FieldValue: { serverTimestamp: jest.fn() } }
+  firestoreAdmin: { collection: jest.fn().mockReturnThis(), add: jest.fn() },
+  FieldValue: { serverTimestamp: jest.fn() }
 }));
 
 describe('/api/saveRating', () => {
