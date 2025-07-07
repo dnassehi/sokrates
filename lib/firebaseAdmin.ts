@@ -14,6 +14,6 @@ if (!admin.apps.length) {
 // Admin-klienter for autentisering og database
 export const authAdmin = admin.auth()
 export const firestoreAdmin = admin.firestore()
-// Eksporer FieldValue og Timestamp for gjenbruk
+// Eksporter FieldValue og Timestamp for gjenbruk
 export const FieldValue = admin.firestore.FieldValue
 export const Timestamp = admin.firestore.Timestamp
