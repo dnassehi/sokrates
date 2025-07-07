@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import InitModal from '../components/InitModal'
-import ChatWindow from '../components/ChatWindow'
+import ChatWindow from '../components/chat/ChatWindow'
 import SubmissionComplete from '../components/chat/SubmissionComplete'
 import { auth } from '../lib/firebase'
 
