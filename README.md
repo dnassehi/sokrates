@@ -36,7 +36,7 @@ Push til ` main `. GitHub Actions bygger, tester og deployer til Vercel.
 
 ## Mappestruktur
 
-Se seksjon 1 i dette dokumentet for detaljert oversikt.
+Se `AGENTS.md` for en detaljert oversikt over filstrukturen.
 
 ## API-ruter
 
